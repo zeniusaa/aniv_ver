@@ -1,0 +1,218 @@
+/* ===== INDEX.CSS — Landing Page Styles ===== */
+
+body {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ─── Main container ─── */
+.container {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 48px 28px;
+  animation: fadeIn 1.2s ease both;
+  width: 100%;
+  max-width: 560px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Logo ring ─── */
+.logo-ring {
+  width: 68px;
+  height: 68px;
+  border: 1.5px solid var(--lavender);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 44px;
+  position: relative;
+  animation: rotateSlow 22s linear infinite;
+  flex-shrink: 0;
+}
+.logo-ring::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  border-top-color: rgba(174,226,255,0.25);
+  animation: rotateSlow 9s linear infinite reverse;
+}
+.logo-inner {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 300;
+  color: var(--lavender);
+  letter-spacing: 0.06em;
+  animation: rotateSlow 22s linear infinite reverse;
+}
+@keyframes rotateSlow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ─── Titles ─── */
+.main-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(34px, 9vw, 68px);
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  color: var(--text-bright);
+  line-height: 1.12;
+  margin-bottom: 10px;
+}
+.main-title em {
+  font-style: italic;
+  color: var(--lavender);
+}
+
+.main-date {
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 14px;
+}
+
+.greeting-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(14px, 2vw, 17px);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--text-muted);
+  line-height: 1.8;
+  max-width: 460px;
+  margin-bottom: 52px;
+  padding: 0 8px;
+}
+
+/* ─── Divider ─── */
+.rule {
+  width: 48px;
+  height: 1px;
+  background: var(--border-2);
+  margin-bottom: 40px;
+}
+
+/* ─── CTA Button ─── */
+.open-btn {
+  position: relative;
+  overflow: hidden;
+  background: rgba(159,161,255,0.12);
+  border: 1px solid rgba(159,161,255,0.4);
+  color: var(--lavender);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  padding: 16px 60px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.3s;
+  /* Touch-friendly min size */
+  min-height: 48px;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+.open-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(174,226,255,0.08), rgba(217,249,223,0.06));
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.open-btn:hover {
+  background: rgba(159,161,255,0.22);
+  border-color: var(--lavender);
+  color: var(--text-bright);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(159,161,255,0.18);
+}
+.open-btn:hover::before { opacity: 1; }
+.open-btn:active { transform: translateY(0); }
+.open-btn span { position: relative; z-index: 1; }
+
+/* ─── Bottom badge ─── */
+.lock-badge {
+  margin-top: 56px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 40px;
+  font-style: italic;
+  font-weight: 300;
+  color: rgba(255,255,255,0.9);
+  letter-spacing: 0.1em;
+  user-select: none;
+}
+
+/* ─── Page exit ─── */
+body.exiting .container {
+  animation: pageExit 0.8s ease forwards;
+}
+@keyframes pageExit {
+  to { opacity: 0; transform: translateY(-20px) scale(1.02); }
+}
+
+/* ─── Mobile ─── */
+@media (max-width: 480px) {
+  body { overflow: auto; }
+
+  .container {
+    padding: 40px 24px 48px;
+    justify-content: center;
+    min-height: 100vh;
+  }
+
+  .logo-ring {
+    width: 54px;
+    height: 54px;
+    margin-bottom: 32px;
+  }
+  .logo-inner { font-size: 16px; }
+
+  .main-title { letter-spacing: 0.05em; }
+
+  .greeting-text {
+    font-size: 15px;
+    margin-bottom: 40px;
+    line-height: 1.75;
+  }
+
+  .open-btn {
+    padding: 16px 40px;
+    font-size: 10px;
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .lock-badge {
+    margin-top: 40px;
+    font-size: 34px;
+  }
+}
+
+/* ─── Short screens (landscape mobile) ─── */
+@media (max-height: 600px) and (orientation: landscape) {
+  body { overflow: auto; }
+
+  .container { padding: 28px 24px; }
+
+  .logo-ring { width: 44px; height: 44px; margin-bottom: 20px; }
+  .logo-inner { font-size: 14px; }
+
+  .greeting-text { margin-bottom: 28px; font-size: 13px; }
+  .rule { margin-bottom: 24px; }
+  .lock-badge { margin-top: 28px; font-size: 30px; }
+}
